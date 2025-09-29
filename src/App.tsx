@@ -61,7 +61,7 @@ function App() {
             Digital Signature & Professional Services
           </p>
           <p className="text-lg md:text-xl mb-12 text-green-100 max-w-2xl mx-auto">
-            Your trusted partner for digital signature tokens, taxation, accounting, and auditing services
+            Your trusted partner for digital authentication solutions and comprehensive business services
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button 
@@ -995,7 +995,7 @@ function App() {
             <span className="text-2xl font-bold">SHCYA</span>
           </div>
           <p className="text-green-200 mb-4">
-            Your trusted partner for digital signature tokens and professional services
+            Your trusted partner for digital authentication solutions and comprehensive business services
           </p>
           <p className="text-green-300 text-sm">
             © 2024 SHCYA - All rights reserved. | Powered by Shavan Kumar
