@@ -441,3 +441,4 @@ function App() {
                             className="w-full mt-3 py-3 bg-gradient-to-r from-emerald-500 to-green-600 rounded-xl text-white font-semibold hover:from-emerald-600 hover:to-green-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-emerald-500/25"
                           >
                             Apply for DSC Online
+                          </button>
