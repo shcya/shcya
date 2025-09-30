@@ -112,7 +112,6 @@ function App() {
               );
             })}
           </div>
-        </div>
       </section>
 
       {/* About Section */}
