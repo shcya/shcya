@@ -83,7 +83,7 @@ function App() {
       {/* Services Overview */}
       <section className="py-20 px-6 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
+              Trusted by Businesses
             <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">Our Services</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Comprehensive professional services to meet all your business needs
