@@ -533,10 +533,10 @@ const App = () => {
                 <div className="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
                   <Shield className="w-10 h-10 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Government Approved</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">eMudhra Partner</h3>
                 <p className="text-gray-600 mb-6">
-                  We are authorized to issue Digital Signature Certificates and provide professional services 
-                  with full government compliance and recognition.
+                  We are an authorized eMudhra partner to issue Digital Signature Certificates and provide professional services 
+                  with full compliance and recognition.
                 </p>
                 <button
                   onClick={() => setShowServiceForm(true)}
