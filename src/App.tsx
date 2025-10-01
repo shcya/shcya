@@ -9,27 +9,27 @@ function App() {
   const services = [
     {
       icon: Shield,
-      title: "Digital Signature Certificate",
-      description: "Secure your digital transactions with Class 2 & Class 3 DSC certificates",
-      features: ["Legal Validity", "Secure Authentication", "Document Signing", "Tax Filing"]
+      title: "Digital Signature",
+      description: "Secure digital signature certificates for legal document authentication and compliance",
+      features: ["Class 2 & Class 3 DSC", "Legal Validity", "Document Signing", "Tax Filing Support"]
     },
     {
       icon: FileText,
-      title: "GST Registration",
-      description: "Complete GST registration services with expert guidance",
-      features: ["Quick Processing", "Document Support", "Compliance Help", "Expert Guidance"]
+      title: "Taxation",
+      description: "Comprehensive tax services including GST, Income Tax, and compliance management",
+      features: ["GST Registration", "Income Tax Filing", "Tax Planning", "Compliance Support"]
     },
     {
       icon: Building,
-      title: "Company Registration",
-      description: "Register your company with complete legal compliance",
-      features: ["Private Limited", "LLP Registration", "Partnership", "Sole Proprietorship"]
+      title: "Book Keeping",
+      description: "Professional bookkeeping services to maintain accurate financial records",
+      features: ["Financial Records", "Account Management", "Monthly Reports", "Digital Solutions"]
     },
     {
       icon: CreditCard,
-      title: "Income Tax Services",
-      description: "Professional tax filing and consultation services",
-      features: ["ITR Filing", "Tax Planning", "Refund Processing", "Audit Support"]
+      title: "Auditing",
+      description: "Expert auditing services ensuring compliance and financial accuracy",
+      features: ["Financial Audits", "Compliance Review", "Risk Assessment", "Audit Reports"]
     }
   ];
 
@@ -157,6 +157,7 @@ function App() {
                     ))}
                   </ul>
                   {service.title === "Digital Signature Certificate" && (
+                  {service.title === "Digital Signature" && (
                     <button
                       onClick={() => setShowDSCForm(true)}
                       className="w-full mt-6 py-3 bg-gradient-to-r from-emerald-500 to-green-600 rounded-xl text-white font-semibold hover:from-emerald-600 hover:to-green-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-emerald-500/25"
@@ -274,10 +275,10 @@ function App() {
             <div>
               <h4 className="text-lg font-semibold mb-4">Services</h4>
               <ul className="space-y-2 text-gray-400">
-                <li>Digital Signature Certificate</li>
-                <li>GST Registration</li>
-                <li>Company Registration</li>
-                <li>Income Tax Services</li>
+                <li>Digital Signature</li>
+                <li>Taxation</li>
+                <li>Book Keeping</li>
+                <li>Auditing</li>
               </ul>
             </div>
             <div>
@@ -580,10 +581,10 @@ function App() {
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
                   <option value="">Select a service</option>
-                  <option value="dsc">Digital Signature Certificate</option>
-                  <option value="gst">GST Registration</option>
-                  <option value="company">Company Registration</option>
-                  <option value="tax">Income Tax Services</option>
+                  <option value="dsc">Digital Signature</option>
+                  <option value="taxation">Taxation</option>
+                  <option value="bookkeeping">Book Keeping</option>
+                  <option value="auditing">Auditing</option>
                 </select>
               </div>
               <div>
