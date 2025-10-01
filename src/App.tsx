@@ -38,8 +38,8 @@ const App = () => {
   ];
 
   const stats = [
-    { number: "500+", label: "Certificates Issued" },
-    { number: "200+", label: "Happy Clients" },
+    { number: "Growing", label: "Client Base" },
+    { number: "Quality", label: "Service Focus" },
     { number: "5+", label: "Years Experience" },
     { number: "24/7", label: "Support Available" }
   ];
