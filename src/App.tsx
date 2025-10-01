@@ -235,21 +235,21 @@ function App() {
                 <Phone className="w-8 h-8" />
               </div>
               <h3 className="text-xl font-semibold mb-2">Call Us</h3>
-              <p className="text-gray-300">+91 98765 43210</p>
+              <p className="text-gray-300">+91 96296 18619</p>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Mail className="w-8 h-8" />
               </div>
               <h3 className="text-xl font-semibold mb-2">Email Us</h3>
-              <p className="text-gray-300">info@shcya.com</p>
+              <p className="text-gray-300">sk.shcya@gmail.com</p>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
                 <MapPin className="w-8 h-8" />
               </div>
               <h3 className="text-xl font-semibold mb-2">Visit Us</h3>
-              <p className="text-gray-300">Mumbai, Maharashtra</p>
+              <p className="text-gray-300">Puducherry, India</p>
             </div>
           </div>
         </div>
@@ -295,11 +295,11 @@ function App() {
               <div className="space-y-2 text-gray-400">
                 <div className="flex items-center">
                   <Phone className="w-4 h-4 mr-2" />
-                  +91 98765 43210
+                  +91 96296 18619
                 </div>
                 <div className="flex items-center">
                   <Mail className="w-4 h-4 mr-2" />
-                  info@shcya.com
+                  sk.shcya@gmail.com
                 </div>
                 <div className="flex items-center">
                   <Clock className="w-4 h-4 mr-2" />
