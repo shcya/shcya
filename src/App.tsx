@@ -466,7 +466,6 @@ const App = () => {
                     </li>
                   ))}
                 </ul>
-                <div className="text-lg font-semibold text-blue-600 mb-4">{service.price}</div>
                 {service.title === "Digital Signature Certificate" ? (
                   <button
                     onClick={() => setShowDSCForm(true)}
