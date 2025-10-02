@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Shield, Calculator, BookOpen, FileCheck, Phone, Mail, MapPin, Menu, X, Star, Users, Award, CheckCircle } from 'lucide-react';
+import { serviceInquiryService, dscApplicationService } from './lib/supabase';
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -46,13 +47,13 @@ const App = () => {
 
   const DSCForm = () => {
     const [formData, setFormData] = useState({
-      applicantName: '',
+      applicant_name: '',
       email: '',
       mobile: '',
-      panNumber: '',
-      aadhaarNumber: '',
-      dscClass: 'class2',
-      applicationType: 'new',
+      pan_number: '',
+      aadhaar_number: '',
+      dsc_class: 'class2',
+      application_type: 'new',
       organization: '',
       designation: '',
       address: '',
@@ -60,12 +61,28 @@ const App = () => {
       state: '',
       pincode: ''
     });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitError, setSubmitError] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
       e.preventDefault();
-      console.log('DSC Application:', formData);
-      alert('DSC Application submitted successfully! We will contact you soon.');
-      setShowDSCForm(false);
+      setIsSubmitting(true);
+      setSubmitError('');
+      
+      try {
+        await dscApplicationService.create(formData);
+        alert('DSC Application submitted successfully! We will contact you soon.');
+        setShowDSCForm(false);
+        setFormData({
+          applicant_name: '', email: '', mobile: '', pan_number: '', aadhaar_number: '',
+          dsc_class: 'class2', application_type: 'new', organization: '', designation: '',
+          address: '', city: '', state: '', pincode: ''
+        });
+      } catch (error) {
+        setSubmitError(error.message || 'Failed to submit application. Please try again.');
+      } finally {
+        setIsSubmitting(false);
+      }
     };
 
     return (
@@ -80,14 +97,19 @@ const App = () => {
             </div>
             
             <form onSubmit={handleSubmit} className="space-y-4">
+              {submitError && (
+                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md">
+                  {submitError}
+                </div>
+              )}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
                   <input
                     type="text"
                     required
-                    value={formData.applicantName}
-                    onChange={(e) => setFormData({...formData, applicantName: e.target.value})}
+                    value={formData.applicant_name}
+                    onChange={(e) => setFormData({...formData, applicant_name: e.target.value})}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
@@ -116,8 +138,8 @@ const App = () => {
                   <input
                     type="text"
                     required
-                    value={formData.panNumber}
-                    onChange={(e) => setFormData({...formData, panNumber: e.target.value})}
+                    value={formData.pan_number}
+                    onChange={(e) => setFormData({...formData, pan_number: e.target.value})}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
@@ -126,16 +148,16 @@ const App = () => {
                   <input
                     type="text"
                     required
-                    value={formData.aadhaarNumber}
-                    onChange={(e) => setFormData({...formData, aadhaarNumber: e.target.value})}
+                    value={formData.aadhaar_number}
+                    onChange={(e) => setFormData({...formData, aadhaar_number: e.target.value})}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">DSC Class *</label>
                   <select
-                    value={formData.dscClass}
-                    onChange={(e) => setFormData({...formData, dscClass: e.target.value})}
+                    value={formData.dsc_class}
+                    onChange={(e) => setFormData({...formData, dsc_class: e.target.value})}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   >
                     <option value="class2">Class 2</option>
@@ -145,8 +167,8 @@ const App = () => {
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Application Type *</label>
                   <select
-                    value={formData.applicationType}
-                    onChange={(e) => setFormData({...formData, applicationType: e.target.value})}
+                    value={formData.application_type}
+                    onChange={(e) => setFormData({...formData, application_type: e.target.value})}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   >
                     <option value="new">New</option>
@@ -224,9 +246,10 @@ const App = () => {
                 </button>
                 <button
                   type="submit"
+                  disabled={isSubmitting}
                   className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
                 >
-                  Submit Application
+                  {isSubmitting ? 'Submitting...' : 'Submit Application'}
                 </button>
               </div>
             </form>
@@ -242,15 +265,29 @@ const App = () => {
       email: '',
       phone: '',
       company: '',
-      serviceType: '',
+      service_type: '',
       message: ''
     });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitError, setSubmitError] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
       e.preventDefault();
-      console.log('Service Inquiry:', formData);
-      alert('Service inquiry submitted successfully! We will contact you soon.');
-      setShowServiceForm(false);
+      setIsSubmitting(true);
+      setSubmitError('');
+      
+      try {
+        await serviceInquiryService.create(formData);
+        alert('Service inquiry submitted successfully! We will contact you soon.');
+        setShowServiceForm(false);
+        setFormData({
+          name: '', email: '', phone: '', company: '', service_type: '', message: ''
+        });
+      } catch (error) {
+        setSubmitError(error.message || 'Failed to submit inquiry. Please try again.');
+      } finally {
+        setIsSubmitting(false);
+      }
     };
 
     return (
@@ -265,6 +302,11 @@ const App = () => {
             </div>
             
             <form onSubmit={handleSubmit} className="space-y-4">
+              {submitError && (
+                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md">
+                  {submitError}
+                </div>
+              )}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Name *</label>
                 <input
@@ -308,8 +350,8 @@ const App = () => {
                 <label className="block text-sm font-medium text-gray-700 mb-1">Service Type *</label>
                 <select
                   required
-                  value={formData.serviceType}
-                  onChange={(e) => setFormData({...formData, serviceType: e.target.value})}
+                  value={formData.service_type}
+                  onChange={(e) => setFormData({...formData, service_type: e.target.value})}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   <option value="">Select a service</option>
@@ -339,9 +381,10 @@ const App = () => {
                 </button>
                 <button
                   type="submit"
+                  disabled={isSubmitting}
                   className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
                 >
-                  Submit Inquiry
+                  {isSubmitting ? 'Submitting...' : 'Submit Inquiry'}
                 </button>
               </div>
             </form>
