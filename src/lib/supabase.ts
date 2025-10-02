@@ -45,6 +45,26 @@ export interface DSCApplication {
   updated_at?: string;
 }
 
+export interface JobApplication {
+  id?: string;
+  full_name: string;
+  email: string;
+  phone: string;
+  position_applied: string;
+  experience_years: number;
+  current_company?: string;
+  qualification: string;
+  skills?: string;
+  resume_url?: string;
+  cover_letter?: string;
+  expected_salary?: string;
+  availability: string;
+  employment_type_preference: string;
+  status?: string;
+  created_at?: string;
+  updated_at?: string;
+}
+
 // Service functions
 export const serviceInquiryService = {
   async create(inquiry: ServiceInquiry) {
@@ -193,6 +213,102 @@ export const dscApplicationService = {
   async updateStatus(id: string, status: string) {
     const { data, error } = await supabase
       .from('dsc_applications')
+      .update({ status })
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  }
+};
+
+export const jobApplicationService = {
+  async create(application: JobApplication) {
+    try {
+      console.log('Submitting job application:', application);
+      
+      const { data, error } = await supabase
+        .from('job_applications')
+        .insert([{
+          full_name: application.full_name,
+          email: application.email,
+          phone: application.phone,
+          position_applied: application.position_applied,
+          experience_years: application.experience_years || 0,
+          current_company: application.current_company || null,
+          qualification: application.qualification,
+          skills: application.skills || null,
+          resume_url: application.resume_url || null,
+          cover_letter: application.cover_letter || null,
+          expected_salary: application.expected_salary || null,
+          availability: application.availability || 'immediate',
+          employment_type_preference: application.employment_type_preference || 'full-time',
+          status: 'pending'
+        }])
+        .select()
+        .single();
+      
+      if (error) {
+        console.error('Job application error details:', {
+          message: error.message,
+          details: error.details,
+          hint: error.hint,
+          code: error.code
+        });
+        
+        if (error.code === '42501') {
+          throw new Error('Database permission error. Please try again or contact support.');
+        } else if (error.code === '23505') {
+          throw new Error('This application has already been submitted.');
+        } else {
+          throw new Error(`Failed to submit job application: ${error.message}`);
+        }
+      }
+      
+      console.log('Job application submitted successfully:', data);
+      return data;
+    } catch (err) {
+      console.error('Job application submission error:', err);
+      throw err;
+    }
+  },
+
+  async getAll() {
+    const { data, error } = await supabase
+      .from('job_applications')
+      .select('*')
+      .order('created_at', { ascending: false });
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async getByPosition(position: string) {
+    const { data, error } = await supabase
+      .from('job_applications')
+      .select('*')
+      .eq('position_applied', position)
+      .order('created_at', { ascending: false });
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async getByStatus(status: string) {
+    const { data, error } = await supabase
+      .from('job_applications')
+      .select('*')
+      .eq('status', status)
+      .order('created_at', { ascending: false });
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async updateStatus(id: string, status: string) {
+    const { data, error } = await supabase
+      .from('job_applications')
       .update({ status })
       .eq('id', id)
       .select()

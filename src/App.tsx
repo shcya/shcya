@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Shield, Calculator, BookOpen, FileCheck, Phone, Mail, MapPin, Menu, X, Star, Users, Award, CheckCircle, Briefcase, GraduationCap, Clock, MapPin as Location } from 'lucide-react';
-import { serviceInquiryService, dscApplicationService } from './lib/supabase';
+import { serviceInquiryService, dscApplicationService, jobApplicationService } from './lib/supabase';
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showDSCForm, setShowDSCForm] = useState(false);
   const [showServiceForm, setShowServiceForm] = useState(false);
+  const [showJobApplicationForm, setShowJobApplicationForm] = useState(false);
+  const [selectedPosition, setSelectedPosition] = useState('');
 
   const services = [
     {
