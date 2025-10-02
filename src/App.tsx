@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Shield, Calculator, BookOpen, FileCheck, Phone, Mail, MapPin, Menu, X, Star, Users, Award, CheckCircle } from 'lucide-react';
+import { Shield, Calculator, BookOpen, FileCheck, Phone, Mail, MapPin, Menu, X, Star, Users, Award, CheckCircle, Briefcase, GraduationCap, Clock, MapPin as Location } from 'lucide-react';
 import { serviceInquiryService, dscApplicationService } from './lib/supabase';
 
 const App = () => {
@@ -415,6 +415,7 @@ const App = () => {
               <a href="#home" className="text-gray-700 hover:text-blue-600 font-medium">Home</a>
               <a href="#services" className="text-gray-700 hover:text-blue-600 font-medium">Services</a>
               <a href="#about" className="text-gray-700 hover:text-blue-600 font-medium">About</a>
+              <a href="#careers" className="text-gray-700 hover:text-blue-600 font-medium">Join Us</a>
               <a href="#contact" className="text-gray-700 hover:text-blue-600 font-medium">Contact</a>
             </nav>
             
@@ -432,6 +433,7 @@ const App = () => {
                 <a href="#home" className="text-gray-700 hover:text-blue-600 font-medium">Home</a>
                 <a href="#services" className="text-gray-700 hover:text-blue-600 font-medium">Services</a>
                 <a href="#about" className="text-gray-700 hover:text-blue-600 font-medium">About</a>
+                <a href="#careers" className="text-gray-700 hover:text-blue-600 font-medium">Join Us</a>
                 <a href="#contact" className="text-gray-700 hover:text-blue-600 font-medium">Contact</a>
               </nav>
             </div>
@@ -663,6 +665,7 @@ const App = () => {
                 <li><a href="#home" className="hover:text-white">Home</a></li>
                 <li><a href="#services" className="hover:text-white">Services</a></li>
                 <li><a href="#about" className="hover:text-white">About</a></li>
+                <li><a href="#careers" className="hover:text-white">Join Us</a></li>
                 <li><a href="#contact" className="hover:text-white">Contact</a></li>
               </ul>
             </div>
