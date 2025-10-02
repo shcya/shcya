@@ -691,6 +691,7 @@ const App = () => {
       {/* Forms */}
       {showDSCForm && <DSCForm />}
       {showServiceForm && <ServiceInquiryForm />}
+      {showJobApplicationForm && <JobApplicationForm />}
     </div>
   );
 };
