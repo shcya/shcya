@@ -396,6 +396,208 @@ const App = () => {
     );
   };
 
+  const JobApplicationForm = () => {
+    const [formData, setFormData] = useState({
+      full_name: '',
+      email: '',
+      phone: '',
+      position_applied: selectedPosition,
+      experience_years: 0,
+      current_company: '',
+      qualification: '',
+      skills: '',
+      cover_letter: '',
+      expected_salary: '',
+      availability: 'immediate',
+      employment_type_preference: 'full-time'
+    });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitError, setSubmitError] = useState('');
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      setIsSubmitting(true);
+      setSubmitError('');
+      
+      try {
+        await jobApplicationService.create({
+          ...formData,
+          position_applied: selectedPosition
+        });
+        alert('Job application submitted successfully! We will review your application and contact you soon.');
+        setShowJobApplicationForm(false);
+        setFormData({
+          full_name: '', email: '', phone: '', position_applied: '', experience_years: 0,
+          current_company: '', qualification: '', skills: '', cover_letter: '',
+          expected_salary: '', availability: 'immediate', employment_type_preference: 'full-time'
+        });
+      } catch (error) {
+        setSubmitError(error.message || 'Failed to submit application. Please try again.');
+      } finally {
+        setIsSubmitting(false);
+      }
+    };
+
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+          <div className="p-6">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-bold text-gray-800">Job Application - {selectedPosition}</h2>
+              <button onClick={() => setShowJobApplicationForm(false)} className="text-gray-500 hover:text-gray-700">
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            
+            <form onSubmit={handleSubmit} className="space-y-4">
+              {submitError && (
+                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md">
+                  {submitError}
+                </div>
+              )}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.full_name}
+                    onChange={(e) => setFormData({...formData, full_name: e.target.value})}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+                  <input
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Phone *</label>
+                  <input
+                    type="tel"
+                    required
+                    value={formData.phone}
+                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Years of Experience *</label>
+                  <input
+                    type="number"
+                    min="0"
+                    required
+                    value={formData.experience_years}
+                    onChange={(e) => setFormData({...formData, experience_years: parseInt(e.target.value) || 0})}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Current Company</label>
+                  <input
+                    type="text"
+                    value={formData.current_company}
+                    onChange={(e) => setFormData({...formData, current_company: e.target.value})}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Highest Qualification *</label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.qualification}
+                    onChange={(e) => setFormData({...formData, qualification: e.target.value})}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Expected Salary</label>
+                  <input
+                    type="text"
+                    value={formData.expected_salary}
+                    onChange={(e) => setFormData({...formData, expected_salary: e.target.value})}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="e.g., ₹5,00,000 per annum"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Availability *</label>
+                  <select
+                    value={formData.availability}
+                    onChange={(e) => setFormData({...formData, availability: e.target.value})}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    <option value="immediate">Immediate</option>
+                    <option value="2-weeks">2 Weeks Notice</option>
+                    <option value="1-month">1 Month Notice</option>
+                    <option value="2-months">2 Months Notice</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Employment Type Preference *</label>
+                  <select
+                    value={formData.employment_type_preference}
+                    onChange={(e) => setFormData({...formData, employment_type_preference: e.target.value})}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    <option value="full-time">Full-time</option>
+                    <option value="part-time">Part-time</option>
+                    <option value="contract">Contract</option>
+                    <option value="remote">Remote</option>
+                    <option value="hybrid">Hybrid</option>
+                  </select>
+                </div>
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Key Skills</label>
+                  <textarea
+                    value={formData.skills}
+                    onChange={(e) => setFormData({...formData, skills: e.target.value})}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    rows="3"
+                    placeholder="List your key skills relevant to this position"
+                  />
+                </div>
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Cover Letter</label>
+                  <textarea
+                    value={formData.cover_letter}
+                    onChange={(e) => setFormData({...formData, cover_letter: e.target.value})}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    rows="4"
+                    placeholder="Tell us why you're interested in this position and what makes you a great fit"
+                  />
+                </div>
+              </div>
+              
+              <div className="flex justify-end space-x-4 pt-4">
+                <button
+                  type="button"
+                  onClick={() => setShowJobApplicationForm(false)}
+                  className="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                >
+                  {isSubmitting ? 'Submitting...' : 'Submit Application'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
@@ -642,149 +844,11 @@ const App = () => {
             </div>
           </div>
           
-          {/* Current Openings */}
-          <div className="mb-16">
-            <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">Current Openings</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {/* Chartered Accountant */}
-              <div className="bg-white border border-gray-200 rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
-                <div className="flex justify-between items-start mb-4">
-                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                    <Briefcase className="w-6 h-6 text-green-600" />
-                  </div>
-                  <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Full-time</span>
-                </div>
-                <h4 className="text-xl font-semibold text-gray-900 mb-2">Chartered Accountant</h4>
-                <div className="flex items-center text-gray-600 mb-4">
-                  <Location className="w-4 h-4 mr-1" />
-                  <span className="text-sm">Puducherry, India</span>
-                </div>
-                
-                <div className="space-y-3 mb-6">
-                  <div>
-                    <h5 className="font-medium text-gray-900 mb-1">Requirements:</h5>
-                    <ul className="text-sm text-gray-600 space-y-1">
-                      <li>• CA qualification from ICAI</li>
-                      <li>• 2-5 years of experience</li>
-                      <li>• Strong knowledge of taxation</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h5 className="font-medium text-gray-900 mb-1">Responsibilities:</h5>
-                    <ul className="text-sm text-gray-600 space-y-1">
-                      <li>• Statutory audits and compliance</li>
-                      <li>• GST and income tax matters</li>
-                      <li>• Financial statement preparation</li>
-                    </ul>
-                  </div>
-                </div>
-                
-                <button
-                  onClick={() => {
-                    setSelectedPosition('Chartered Accountant');
-                    setShowJobApplicationForm(true);
-                  }}
-                  className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors"
-                >
-                  Apply Now
-                </button>
-              </div>
-              
-              {/* Tax Consultant */}
-              <div className="bg-white border border-gray-200 rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
-                <div className="flex justify-between items-start mb-4">
-                  <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-                    <Calculator className="w-6 h-6 text-purple-600" />
-                  </div>
-                  <span className="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Flexible</span>
-                </div>
-                <h4 className="text-xl font-semibold text-gray-900 mb-2">Tax Consultant</h4>
-                <div className="flex items-center text-gray-600 mb-4">
-                  <Location className="w-4 h-4 mr-1" />
-                  <span className="text-sm">Remote/Hybrid</span>
-                </div>
-                
-                <div className="space-y-3 mb-6">
-                  <div>
-                    <h5 className="font-medium text-gray-900 mb-1">Requirements:</h5>
-                    <ul className="text-sm text-gray-600 space-y-1">
-                      <li>• B.Com/M.Com qualification</li>
-                      <li>• 1-3 years tax experience</li>
-                      <li>• GST and income tax knowledge</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h5 className="font-medium text-gray-900 mb-1">Responsibilities:</h5>
-                    <ul className="text-sm text-gray-600 space-y-1">
-                      <li>• Tax return preparation</li>
-                      <li>• GST filing and compliance</li>
-                      <li>• Client consultation</li>
-                    </ul>
-                  </div>
-                </div>
-                
-                <button
-                  onClick={() => {
-                    setSelectedPosition('Tax Consultant');
-                    setShowJobApplicationForm(true);
-                  }}
-                  className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors"
-                >
-                  Apply Now
-                </button>
-              </div>
-              
-              {/* Digital Services Associate */}
-              <div className="bg-white border border-gray-200 rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
-                <div className="flex justify-between items-start mb-4">
-                  <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center">
-                    <Shield className="w-6 h-6 text-indigo-600" />
-                  </div>
-                  <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Full-time</span>
-                </div>
-                <h4 className="text-xl font-semibold text-gray-900 mb-2">Digital Services Associate</h4>
-                <div className="flex items-center text-gray-600 mb-4">
-                  <Location className="w-4 h-4 mr-1" />
-                  <span className="text-sm">Puducherry, India</span>
-                </div>
-                
-                <div className="space-y-3 mb-6">
-                  <div>
-                    <h5 className="font-medium text-gray-900 mb-1">Requirements:</h5>
-                    <ul className="text-sm text-gray-600 space-y-1">
-                      <li>• Graduate in any discipline</li>
-                      <li>• 0-2 years experience</li>
-                      <li>• Good communication skills</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h5 className="font-medium text-gray-900 mb-1">Responsibilities:</h5>
-                    <ul className="text-sm text-gray-600 space-y-1">
-                      <li>• DSC application processing</li>
-                      <li>• Client support and coordination</li>
-                      <li>• Documentation management</li>
-                    </ul>
-                  </div>
-                </div>
-                
-                <button
-                  onClick={() => {
-                    setSelectedPosition('Digital Services Associate');
-                    setShowJobApplicationForm(true);
-                  }}
-                  className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors"
-                >
-                  Apply Now
-                </button>
-              </div>
-            </div>
-          </div>
-          
           {/* General Application */}
           <div className="bg-gray-50 rounded-2xl p-8 text-center">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Don't See Your Role?</h3>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">Ready to Join Our Team?</h3>
             <p className="text-gray-600 mb-6">
-              We're always looking for talented individuals to join our team. Send us your resume and let us know how you can contribute to our mission.
+              We're always looking for talented individuals to join our growing team. Whether you're a Chartered Accountant, Tax Consultant, Digital Services Associate, or have other relevant skills, we'd love to hear from you. Send us your resume and let us know how you can contribute to our mission of empowering business excellence.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
@@ -794,7 +858,7 @@ const App = () => {
                 }}
                 className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
               >
-                Submit General Application
+                Submit Your Application
               </button>
               <a
                 href="mailto:sk.shcya@gmail.com?subject=Career Opportunity"
