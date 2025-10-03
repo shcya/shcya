@@ -7,7 +7,7 @@ const App = () => {
   const [showDSCForm, setShowDSCForm] = useState(false);
   const [showServiceForm, setShowServiceForm] = useState(false);
   const [showJobApplicationForm, setShowJobApplicationForm] = useState(false);
-  const [selectedPosition, setSelectedPosition] = useState('');
+  const [selectedPosition, setSelectedPosition] = useState('General Application');
 
   const services = [
     {
