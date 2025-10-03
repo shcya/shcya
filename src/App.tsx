@@ -597,6 +597,216 @@ const App = () => {
         </div>
       </section>
 
+      {/* Careers Section */}
+      <section id="careers" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Join Our Team</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Be part of a dynamic team that's shaping the future of digital business solutions
+            </p>
+          </div>
+          
+          {/* Why Work With Us */}
+          <div className="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-2xl p-8 mb-16">
+            <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">Why Work With Us?</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="text-center">
+                <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Users className="w-6 h-6 text-white" />
+                </div>
+                <h4 className="font-semibold text-gray-900 mb-2">Collaborative Environment</h4>
+                <p className="text-gray-600 text-sm">Work with passionate professionals in a supportive team culture</p>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <GraduationCap className="w-6 h-6 text-white" />
+                </div>
+                <h4 className="font-semibold text-gray-900 mb-2">Professional Growth</h4>
+                <p className="text-gray-600 text-sm">Continuous learning opportunities and career advancement</p>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Award className="w-6 h-6 text-white" />
+                </div>
+                <h4 className="font-semibold text-gray-900 mb-2">Industry Recognition</h4>
+                <p className="text-gray-600 text-sm">Work with certified professionals and industry leaders</p>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Clock className="w-6 h-6 text-white" />
+                </div>
+                <h4 className="font-semibold text-gray-900 mb-2">Work-Life Balance</h4>
+                <p className="text-gray-600 text-sm">Flexible working arrangements and competitive benefits</p>
+              </div>
+            </div>
+          </div>
+          
+          {/* Current Openings */}
+          <div className="mb-16">
+            <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">Current Openings</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Chartered Accountant */}
+              <div className="bg-white border border-gray-200 rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+                <div className="flex justify-between items-start mb-4">
+                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                    <Briefcase className="w-6 h-6 text-green-600" />
+                  </div>
+                  <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Full-time</span>
+                </div>
+                <h4 className="text-xl font-semibold text-gray-900 mb-2">Chartered Accountant</h4>
+                <div className="flex items-center text-gray-600 mb-4">
+                  <Location className="w-4 h-4 mr-1" />
+                  <span className="text-sm">Puducherry, India</span>
+                </div>
+                
+                <div className="space-y-3 mb-6">
+                  <div>
+                    <h5 className="font-medium text-gray-900 mb-1">Requirements:</h5>
+                    <ul className="text-sm text-gray-600 space-y-1">
+                      <li>• CA qualification from ICAI</li>
+                      <li>• 2-5 years of experience</li>
+                      <li>• Strong knowledge of taxation</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h5 className="font-medium text-gray-900 mb-1">Responsibilities:</h5>
+                    <ul className="text-sm text-gray-600 space-y-1">
+                      <li>• Statutory audits and compliance</li>
+                      <li>• GST and income tax matters</li>
+                      <li>• Financial statement preparation</li>
+                    </ul>
+                  </div>
+                </div>
+                
+                <button
+                  onClick={() => {
+                    setSelectedPosition('Chartered Accountant');
+                    setShowJobApplicationForm(true);
+                  }}
+                  className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  Apply Now
+                </button>
+              </div>
+              
+              {/* Tax Consultant */}
+              <div className="bg-white border border-gray-200 rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+                <div className="flex justify-between items-start mb-4">
+                  <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                    <Calculator className="w-6 h-6 text-purple-600" />
+                  </div>
+                  <span className="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Flexible</span>
+                </div>
+                <h4 className="text-xl font-semibold text-gray-900 mb-2">Tax Consultant</h4>
+                <div className="flex items-center text-gray-600 mb-4">
+                  <Location className="w-4 h-4 mr-1" />
+                  <span className="text-sm">Remote/Hybrid</span>
+                </div>
+                
+                <div className="space-y-3 mb-6">
+                  <div>
+                    <h5 className="font-medium text-gray-900 mb-1">Requirements:</h5>
+                    <ul className="text-sm text-gray-600 space-y-1">
+                      <li>• B.Com/M.Com qualification</li>
+                      <li>• 1-3 years tax experience</li>
+                      <li>• GST and income tax knowledge</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h5 className="font-medium text-gray-900 mb-1">Responsibilities:</h5>
+                    <ul className="text-sm text-gray-600 space-y-1">
+                      <li>• Tax return preparation</li>
+                      <li>• GST filing and compliance</li>
+                      <li>• Client consultation</li>
+                    </ul>
+                  </div>
+                </div>
+                
+                <button
+                  onClick={() => {
+                    setSelectedPosition('Tax Consultant');
+                    setShowJobApplicationForm(true);
+                  }}
+                  className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  Apply Now
+                </button>
+              </div>
+              
+              {/* Digital Services Associate */}
+              <div className="bg-white border border-gray-200 rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+                <div className="flex justify-between items-start mb-4">
+                  <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center">
+                    <Shield className="w-6 h-6 text-indigo-600" />
+                  </div>
+                  <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Full-time</span>
+                </div>
+                <h4 className="text-xl font-semibold text-gray-900 mb-2">Digital Services Associate</h4>
+                <div className="flex items-center text-gray-600 mb-4">
+                  <Location className="w-4 h-4 mr-1" />
+                  <span className="text-sm">Puducherry, India</span>
+                </div>
+                
+                <div className="space-y-3 mb-6">
+                  <div>
+                    <h5 className="font-medium text-gray-900 mb-1">Requirements:</h5>
+                    <ul className="text-sm text-gray-600 space-y-1">
+                      <li>• Graduate in any discipline</li>
+                      <li>• 0-2 years experience</li>
+                      <li>• Good communication skills</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h5 className="font-medium text-gray-900 mb-1">Responsibilities:</h5>
+                    <ul className="text-sm text-gray-600 space-y-1">
+                      <li>• DSC application processing</li>
+                      <li>• Client support and coordination</li>
+                      <li>• Documentation management</li>
+                    </ul>
+                  </div>
+                </div>
+                
+                <button
+                  onClick={() => {
+                    setSelectedPosition('Digital Services Associate');
+                    setShowJobApplicationForm(true);
+                  }}
+                  className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  Apply Now
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          {/* General Application */}
+          <div className="bg-gray-50 rounded-2xl p-8 text-center">
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">Don't See Your Role?</h3>
+            <p className="text-gray-600 mb-6">
+              We're always looking for talented individuals to join our team. Send us your resume and let us know how you can contribute to our mission.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button
+                onClick={() => {
+                  setSelectedPosition('General Application');
+                  setShowJobApplicationForm(true);
+                }}
+                className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Submit General Application
+              </button>
+              <a
+                href="mailto:sk.shcya@gmail.com?subject=Career Opportunity"
+                className="border border-blue-600 text-blue-600 px-6 py-3 rounded-lg hover:bg-blue-50 transition-colors"
+              >
+                Email Resume Directly
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Section */}
       <section id="contact" className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
