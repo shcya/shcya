@@ -650,7 +650,7 @@ const App = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-              Empowering Business <span className="text-blue-600">Excellence</span>
+              <span className="text-blue-600">Empowering You</span> in the Digital Era
             </h1>
             <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
               Transform your business with cutting-edge digital solutions. From secure Digital Signature Certificates 
@@ -738,6 +738,31 @@ const App = () => {
       {/* About Section */}
       <section id="about" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Vision & Mission */}
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-12">Our Vision & Mission</h2>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-2xl p-8">
+                <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Star className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Vision</h3>
+                <p className="text-lg text-gray-700 leading-relaxed">
+                  "To be the most trusted partner in digital identity and professional services, setting new standards of security and reliability."
+                </p>
+              </div>
+              <div className="bg-gradient-to-br from-green-50 to-emerald-100 rounded-2xl p-8">
+                <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Award className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Mission</h3>
+                <p className="text-lg text-gray-700 leading-relaxed">
+                  "To deliver secure, seamless, and client-focused solutions that simplify compliance, inspire confidence, and drive digital growth."
+                </p>
+              </div>
+            </div>
+          </div>
+          
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">The SHCYA Advantage</h2>
