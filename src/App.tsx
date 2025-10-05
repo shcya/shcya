@@ -606,7 +606,7 @@ const App = () => {
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-3">
               <img 
-                src="/shcya.png" 
+                src="/shcya copy copy copy copy.png" 
                 alt="SHCYA Logo" 
                 className="w-12 h-12 object-contain"
               />
@@ -939,7 +939,7 @@ const App = () => {
             <div>
               <div className="flex items-center space-x-3 mb-4">
                 <img 
-                  src="/shcya.png" 
+                  src="/shcya copy copy copy copy.png" 
                   alt="SHCYA Logo" 
                   className="w-10 h-10 object-contain"
                 />
