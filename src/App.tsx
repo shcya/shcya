@@ -618,6 +618,7 @@ const App = () => {
             <nav className="hidden md:flex space-x-8">
               <a href="#home" className="text-gray-700 hover:text-blue-600 font-medium">Home</a>
               <a href="#services" className="text-gray-700 hover:text-blue-600 font-medium">Services</a>
+              <a href="#tools" className="text-gray-700 hover:text-blue-600 font-medium">Tools</a>
               <a href="#about" className="text-gray-700 hover:text-blue-600 font-medium">About</a>
               <a href="#careers" className="text-gray-700 hover:text-blue-600 font-medium">Join Us</a>
               <a href="#contact" className="text-gray-700 hover:text-blue-600 font-medium">Contact</a>
@@ -636,6 +637,7 @@ const App = () => {
               <nav className="flex flex-col space-y-4">
                 <a href="#home" className="text-gray-700 hover:text-blue-600 font-medium">Home</a>
                 <a href="#services" className="text-gray-700 hover:text-blue-600 font-medium">Services</a>
+                <a href="#tools" className="text-gray-700 hover:text-blue-600 font-medium">Tools</a>
                 <a href="#about" className="text-gray-700 hover:text-blue-600 font-medium">About</a>
                 <a href="#careers" className="text-gray-700 hover:text-blue-600 font-medium">Join Us</a>
                 <a href="#contact" className="text-gray-700 hover:text-blue-600 font-medium">Contact</a>
