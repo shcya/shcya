@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Shield, Calculator, BookOpen, FileCheck, Phone, Mail, MapPin, Menu, X, Star, Users, Award, CheckCircle, Briefcase, GraduationCap, Clock, MapPin as Location } from 'lucide-react';
+import { Shield, Calculator, BookOpen, FileCheck, Phone, Mail, MapPin, Menu, X, Star, Users, Award, CheckCircle, Briefcase, GraduationCap, Clock, MapPin as Location, ChevronDown, ChevronUp, Receipt, DollarSign, PieChart, FileText, Percent, TrendingUp, BarChart3, CreditCard, Building, Calendar } from 'lucide-react';
 import { serviceInquiryService, dscApplicationService, jobApplicationService } from './lib/supabase';
 
 const App = () => {
@@ -8,6 +8,7 @@ const App = () => {
   const [showServiceForm, setShowServiceForm] = useState(false);
   const [showJobApplicationForm, setShowJobApplicationForm] = useState(false);
   const [selectedPosition, setSelectedPosition] = useState('General Application');
+  const [expandedToolCategory, setExpandedToolCategory] = useState(null);
 
   const services = [
     {
@@ -45,6 +46,65 @@ const App = () => {
     { number: "Quality", label: "Service Focus" },
     { number: "5+", label: "Years Experience" },
     { number: "24/7", label: "Support Available" }
+  ];
+
+  const toolsCategories = [
+    {
+      id: 'gst',
+      title: 'GST Tools',
+      icon: Receipt,
+      description: 'Comprehensive GST calculation and compliance tools',
+      tools: [
+        { name: 'GST Calculator', description: 'Calculate GST amount for your transactions', icon: Calculator },
+        { name: 'HSN Code Finder', description: 'Find correct HSN codes for your products', icon: FileText },
+        { name: 'GST Rate Checker', description: 'Check applicable GST rates for different items', icon: Percent },
+        { name: 'Input Tax Credit Calculator', description: 'Calculate available input tax credit', icon: CreditCard },
+        { name: 'GSTR Filing Assistant', description: 'Step-by-step filing guidance', icon: FileCheck },
+        { name: 'Reverse Charge Calculator', description: 'Calculate reverse charge mechanism', icon: TrendingUp }
+      ]
+    },
+    {
+      id: 'income-tax',
+      title: 'Income Tax Tools',
+      icon: DollarSign,
+      description: 'Income tax calculation and planning utilities',
+      tools: [
+        { name: 'Income Tax Calculator', description: 'Calculate your income tax liability', icon: Calculator },
+        { name: 'TDS Calculator', description: 'Calculate TDS on various payments', icon: Percent },
+        { name: 'Capital Gains Calculator', description: 'Calculate short & long term capital gains', icon: TrendingUp },
+        { name: 'HRA Calculator', description: 'Calculate House Rent Allowance exemption', icon: Building },
+        { name: 'SIP Calculator', description: 'Calculate SIP returns and tax implications', icon: BarChart3 },
+        { name: 'Form 16 Validator', description: 'Validate and verify Form 16 details', icon: FileCheck }
+      ]
+    },
+    {
+      id: 'accounting',
+      title: 'Accounting Tools',
+      icon: PieChart,
+      description: 'Essential accounting and financial calculation tools',
+      tools: [
+        { name: 'EMI Calculator', description: 'Calculate loan EMI and interest', icon: Calculator },
+        { name: 'Depreciation Calculator', description: 'Calculate asset depreciation', icon: TrendingUp },
+        { name: 'Working Capital Calculator', description: 'Analyze working capital requirements', icon: BarChart3 },
+        { name: 'Break-even Calculator', description: 'Calculate break-even point', icon: PieChart },
+        { name: 'ROI Calculator', description: 'Calculate return on investment', icon: DollarSign },
+        { name: 'Cash Flow Projector', description: 'Project future cash flows', icon: Calendar }
+      ]
+    },
+    {
+      id: 'others',
+      title: 'Other Tools',
+      icon: FileText,
+      description: 'Additional business and compliance tools',
+      tools: [
+        { name: 'Company Name Generator', description: 'Generate unique company names', icon: Building },
+        { name: 'Invoice Generator', description: 'Create professional invoices', icon: Receipt },
+        { name: 'Salary Calculator', description: 'Calculate gross/net salary', icon: DollarSign },
+        { name: 'Business Loan Calculator', description: 'Calculate business loan eligibility', icon: CreditCard },
+        { name: 'Compliance Calendar', description: 'Track important compliance dates', icon: Calendar },
+        { name: 'Document Checklist', description: 'Business registration document checklist', icon: FileCheck }
+      ]
+    }
   ];
 
   const DSCForm = () => {
@@ -733,6 +793,89 @@ const App = () => {
                 )}
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Tools Section */}
+      <section id="tools" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Business Tools</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Powerful calculators and utilities to streamline your business operations and compliance
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {toolsCategories.map((category) => (
+              <div key={category.id} className="bg-gray-50 rounded-xl shadow-lg overflow-hidden">
+                <div 
+                  className="p-6 cursor-pointer hover:bg-gray-100 transition-colors"
+                  onClick={() => setExpandedToolCategory(expandedToolCategory === category.id ? null : category.id)}
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-4">
+                      <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                        <category.icon className="w-6 h-6 text-blue-600" />
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-semibold text-gray-900">{category.title}</h3>
+                        <p className="text-gray-600">{category.description}</p>
+                      </div>
+                    </div>
+                    {expandedToolCategory === category.id ? (
+                      <ChevronUp className="w-5 h-5 text-gray-500" />
+                    ) : (
+                      <ChevronDown className="w-5 h-5 text-gray-500" />
+                    )}
+                  </div>
+                </div>
+                
+                {expandedToolCategory === category.id && (
+                  <div className="px-6 pb-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {category.tools.map((tool, index) => (
+                        <div key={index} className="bg-white rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer">
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                              <tool.icon className="w-4 h-4 text-blue-600" />
+                            </div>
+                            <div>
+                              <h4 className="font-semibold text-gray-900 mb-1">{tool.name}</h4>
+                              <p className="text-sm text-gray-600">{tool.description}</p>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="mt-4 text-center">
+                      <button
+                        onClick={() => setShowServiceForm(true)}
+                        className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                      >
+                        Request Access to {category.title}
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+          
+          <div className="text-center mt-12">
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Need a Custom Tool?</h3>
+              <p className="text-gray-600 mb-6">
+                Can't find the tool you need? We can create custom calculators and utilities tailored to your specific business requirements.
+              </p>
+              <button
+                onClick={() => setShowServiceForm(true)}
+                className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Request Custom Tool
+              </button>
+            </div>
           </div>
         </div>
       </section>
