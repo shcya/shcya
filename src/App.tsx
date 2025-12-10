@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Shield, Calculator, BookOpen, FileCheck, Phone, Mail, MapPin, Menu, X, Star, Users, Award, CheckCircle, Briefcase, GraduationCap, Clock, MapPin as Location } from 'lucide-react';
+import { Shield, Calculator, BookOpen, FileCheck, Phone, Mail, MapPin, Menu, X, Star, Users, Award, CheckCircle, Briefcase, GraduationCap, Clock, MapPin as Location, Search } from 'lucide-react';
 import { serviceInquiryService, dscApplicationService, jobApplicationService } from './lib/supabase';
 import Rule86BCalculator from './components/Rule86BCalculator';
 
@@ -9,6 +9,7 @@ const App = () => {
   const [showServiceForm, setShowServiceForm] = useState(false);
   const [showJobApplicationForm, setShowJobApplicationForm] = useState(false);
   const [showRule86BCalculator, setShowRule86BCalculator] = useState(false);
+  const [showToolNavigator, setShowToolNavigator] = useState(false);
   const [selectedPosition, setSelectedPosition] = useState('General Application');
 
   const services = [
@@ -995,6 +996,194 @@ const App = () => {
       {showDSCForm && <DSCForm />}
       {showServiceForm && <ServiceInquiryForm />}
       {showJobApplicationForm && <JobApplicationForm />}
+      {showRule86BCalculator && (
+        <Rule86BCalculator 
+          isOpen={showRule86BCalculator} 
+          onClose={() => setShowRule86BCalculator(false)} 
+        />
+      )}
+
+      {/* Tool Navigator */}
+      {showToolNavigator && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+            <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-6 rounded-t-2xl">
+              <div className="flex justify-between items-center">
+                <div className="flex items-center space-x-3">
+                  <div className="w-12 h-12 bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
+                    <Calculator className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-bold">Professional Tools Navigator</h2>
+                    <p className="text-blue-100">Access all your business calculation tools</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setShowToolNavigator(false)}
+                  className="p-2 hover:bg-white hover:bg-opacity-20 rounded-lg transition-colors"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+            </div>
+
+            <div className="p-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* GST Tools */}
+                <div className="bg-gradient-to-br from-green-50 to-emerald-100 rounded-xl p-6 border border-green-200">
+                  <div className="flex items-center space-x-3 mb-4">
+                    <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center">
+                      <FileCheck className="w-5 h-5 text-white" />
+                    </div>
+                    <h3 className="text-lg font-bold text-green-900">GST Tools</h3>
+                  </div>
+                  <div className="space-y-3">
+                    <button
+                      onClick={() => {
+                        setShowToolNavigator(false);
+                        setShowRule86BCalculator(true);
+                      }}
+                      className="w-full text-left p-3 bg-white rounded-lg hover:bg-green-50 transition-colors border border-green-200 hover:border-green-300"
+                    >
+                      <div className="flex items-center space-x-2">
+                        <Calculator className="w-4 h-4 text-green-600" />
+                        <span className="font-medium text-green-800">Rule 86B Calculator</span>
+                      </div>
+                      <p className="text-sm text-green-600 mt-1">Check GST Rule 86B compliance</p>
+                    </button>
+                    <div className="p-3 bg-white rounded-lg border border-green-200 opacity-60">
+                      <div className="flex items-center space-x-2">
+                        <Calculator className="w-4 h-4 text-green-400" />
+                        <span className="font-medium text-green-600">GST Calculator</span>
+                      </div>
+                      <p className="text-sm text-green-500 mt-1">Coming Soon</p>
+                    </div>
+                    <div className="p-3 bg-white rounded-lg border border-green-200 opacity-60">
+                      <div className="flex items-center space-x-2">
+                        <Search className="w-4 h-4 text-green-400" />
+                        <span className="font-medium text-green-600">HSN Code Finder</span>
+                      </div>
+                      <p className="text-sm text-green-500 mt-1">Coming Soon</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Income Tax Tools */}
+                <div className="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-xl p-6 border border-blue-200">
+                  <div className="flex items-center space-x-3 mb-4">
+                    <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+                      <Calculator className="w-5 h-5 text-white" />
+                    </div>
+                    <h3 className="text-lg font-bold text-blue-900">Income Tax Tools</h3>
+                  </div>
+                  <div className="space-y-3">
+                    <div className="p-3 bg-white rounded-lg border border-blue-200 opacity-60">
+                      <div className="flex items-center space-x-2">
+                        <Calculator className="w-4 h-4 text-blue-400" />
+                        <span className="font-medium text-blue-600">Income Tax Calculator</span>
+                      </div>
+                      <p className="text-sm text-blue-500 mt-1">Coming Soon</p>
+                    </div>
+                    <div className="p-3 bg-white rounded-lg border border-blue-200 opacity-60">
+                      <div className="flex items-center space-x-2">
+                        <FileCheck className="w-4 h-4 text-blue-400" />
+                        <span className="font-medium text-blue-600">TDS Calculator</span>
+                      </div>
+                      <p className="text-sm text-blue-500 mt-1">Coming Soon</p>
+                    </div>
+                    <div className="p-3 bg-white rounded-lg border border-blue-200 opacity-60">
+                      <div className="flex items-center space-x-2">
+                        <BookOpen className="w-4 h-4 text-blue-400" />
+                        <span className="font-medium text-blue-600">HRA Calculator</span>
+                      </div>
+                      <p className="text-sm text-blue-500 mt-1">Coming Soon</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Accounting Tools */}
+                <div className="bg-gradient-to-br from-purple-50 to-violet-100 rounded-xl p-6 border border-purple-200">
+                  <div className="flex items-center space-x-3 mb-4">
+                    <div className="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center">
+                      <BookOpen className="w-5 h-5 text-white" />
+                    </div>
+                    <h3 className="text-lg font-bold text-purple-900">Accounting Tools</h3>
+                  </div>
+                  <div className="space-y-3">
+                    <div className="p-3 bg-white rounded-lg border border-purple-200 opacity-60">
+                      <div className="flex items-center space-x-2">
+                        <Calculator className="w-4 h-4 text-purple-400" />
+                        <span className="font-medium text-purple-600">EMI Calculator</span>
+                      </div>
+                      <p className="text-sm text-purple-500 mt-1">Coming Soon</p>
+                    </div>
+                    <div className="p-3 bg-white rounded-lg border border-purple-200 opacity-60">
+                      <div className="flex items-center space-x-2">
+                        <BookOpen className="w-4 h-4 text-purple-400" />
+                        <span className="font-medium text-purple-600">Depreciation Calculator</span>
+                      </div>
+                      <p className="text-sm text-purple-500 mt-1">Coming Soon</p>
+                    </div>
+                    <div className="p-3 bg-white rounded-lg border border-purple-200 opacity-60">
+                      <div className="flex items-center space-x-2">
+                        <FileCheck className="w-4 h-4 text-purple-400" />
+                        <span className="font-medium text-purple-600">ROI Calculator</span>
+                      </div>
+                      <p className="text-sm text-purple-500 mt-1">Coming Soon</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Quick Actions */}
+              <div className="mt-8 bg-gray-50 rounded-xl p-6">
+                <h3 className="text-lg font-bold text-gray-900 mb-4">Quick Actions</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <button
+                    onClick={() => {
+                      setShowToolNavigator(false);
+                      setShowServiceForm(true);
+                    }}
+                    className="flex items-center space-x-3 p-4 bg-white rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-colors"
+                  >
+                    <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                      <Mail className="w-4 h-4 text-blue-600" />
+                    </div>
+                    <div className="text-left">
+                      <div className="font-medium text-gray-900">Request Custom Tool</div>
+                      <div className="text-sm text-gray-600">Need a specific calculator?</div>
+                    </div>
+                  </button>
+                  <button
+                    onClick={() => {
+                      setShowToolNavigator(false);
+                      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    className="flex items-center space-x-3 p-4 bg-white rounded-lg border border-gray-200 hover:border-green-300 hover:bg-green-50 transition-colors"
+                  >
+                    <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
+                      <Phone className="w-4 h-4 text-green-600" />
+                    </div>
+                    <div className="text-left">
+                      <div className="font-medium text-gray-900">Get Support</div>
+                      <div className="text-sm text-gray-600">Need help with calculations?</div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Floating Tool Navigator Button */}
+      <button
+        onClick={() => setShowToolNavigator(true)}
+        className="fixed bottom-6 right-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 z-40"
+        title="Open Tools Navigator"
+      >
+        <Calculator className="w-6 h-6" />
+      </button>
     </div>
   );
 };
